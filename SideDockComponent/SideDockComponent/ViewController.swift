@@ -7,7 +7,7 @@
 
 import UIKit
 import IBAnimatable
-
+//, UIPopoverPresentationControllerDelegate
 class ViewController: UIViewController {
 
     @IBOutlet weak var commandButton: AnimatableButton!
@@ -29,5 +29,17 @@ class ViewController: UIViewController {
                 print("Rename initiated")
             },
         ])
+    }
+    
+    @IBAction func showPopover(_ sender: Any) {
+//        let vc = UIViewController()
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "popover")
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.sourceView = sender as? UIView
+        vc.preferredContentSize = CGSize(width: 200, height: 200)
+        vc.view.backgroundColor = .systemBlue
+//        vc.popoverPresentationController?.delegate = self
+        self.present(vc, animated: true, completion: nil)
     }
 }
